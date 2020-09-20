@@ -1,0 +1,8 @@
+[Unit]
+Description=Sensor
+
+[Service]
+ExecStart=/usr/bin/python3 /opt/sensor/sensor.py
+
+[Install]
+WantedBy=multi-user.target
