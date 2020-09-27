@@ -1,10 +1,6 @@
-﻿using System;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-
-namespace Browser.FormsApp
+﻿namespace Browser.FormsApp
 {
-    public partial class App : Application
+    public partial class App
     {
         public App()
         {
