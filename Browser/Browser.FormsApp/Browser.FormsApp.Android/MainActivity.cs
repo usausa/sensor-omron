@@ -7,6 +7,7 @@
     using Android.Views;
 
     [Activity(
+        Name = "com.example.monitor.MainActivity",
         Label = "Browser.FormsApp",
         Icon = "@mipmap/icon",
         Theme = "@style/MainTheme",

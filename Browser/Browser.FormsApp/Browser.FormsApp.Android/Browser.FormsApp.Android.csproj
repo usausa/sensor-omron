@@ -74,6 +74,8 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\DeviceManager.cs" />
+    <Compile Include="Components\RestartActivity.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
