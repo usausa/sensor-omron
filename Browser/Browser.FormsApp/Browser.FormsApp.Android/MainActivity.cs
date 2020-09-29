@@ -25,9 +25,6 @@
 
             base.OnCreate(savedInstanceState);
 
-            // Database
-            SQLitePCL.Batteries_V2.Init();
-
             // Components
             Rg.Plugins.Popup.Popup.Init(this, savedInstanceState);
 
