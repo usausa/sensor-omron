@@ -1,10 +1,17 @@
 ﻿namespace Browser.FormsApp.Droid
 {
     using Android.App;
+    using Android.Content;
     using Android.Content.PM;
     using Android.OS;
     using Android.Runtime;
     using Android.Views;
+
+    using Browser.FormsApp.Components;
+    using Browser.FormsApp.Droid.Components;
+
+    using Smart.Forms.Resolver;
+    using Smart.Resolver;
 
     [Activity(
         Name = "com.example.monitor.MainActivity",
@@ -33,7 +40,7 @@
             Xamarin.Forms.Forms.Init(this, savedInstanceState);
             Xamarin.Forms.FormsMaterial.Init(this, savedInstanceState);
 
-            LoadApplication(new App());
+            LoadApplication(new App(new ComponentProvider(this)));
 
             // Full screen
             Window.AddFlags(WindowManagerFlags.KeepScreenOn);
@@ -63,6 +70,23 @@
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
 
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+
+        private sealed class ComponentProvider : IComponentProvider
+        {
+            private readonly MainActivity activity;
+
+            public ComponentProvider(MainActivity activity)
+            {
+                this.activity = activity;
+            }
+
+            public void RegisterComponents(ResolverConfig config)
+            {
+                config.Bind<Context>().ToConstant(activity).InSingletonScope();
+
+                config.Bind<IDeviceManager>().To<DeviceManager>().InSingletonScope();
+            }
         }
     }
 }

@@ -2,6 +2,8 @@
 {
     public interface IDeviceManager
     {
+        void StartTimer();
+
         void Restart();
     }
 }

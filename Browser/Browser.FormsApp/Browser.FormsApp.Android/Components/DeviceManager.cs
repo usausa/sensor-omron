@@ -15,6 +15,11 @@
             this.activity = activity;
         }
 
+        public void StartTimer()
+        {
+            // TODO
+        }
+
         public void Restart()
         {
             var context = activity.ApplicationContext;
