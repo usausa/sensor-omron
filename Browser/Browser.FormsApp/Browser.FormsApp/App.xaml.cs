@@ -1,5 +1,7 @@
 ﻿namespace Browser.FormsApp
 {
+    using System;
+
     using Browser.FormsApp.Components;
     using Browser.FormsApp.State;
 
@@ -38,9 +40,17 @@
 
         protected override void OnStart()
         {
+            // TODO 見直し
             var deviceManager = resolver.Get<IDeviceManager>();
 
-            // TODO 再起動設定
+            var previousDate = DateTime.Today;
+            deviceManager.TimerTrigger.Subscribe(x =>
+            {
+                if (x.Date != previousDate)
+                {
+                    deviceManager.Restart();
+                }
+            });
 
             deviceManager.StartTimer();
         }
