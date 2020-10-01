@@ -8,6 +8,8 @@
     using Smart.Forms.Resolver;
     using Smart.Resolver;
 
+    using Xamarin.Forms;
+
     public partial class App
     {
         private readonly SmartResolver resolver;
@@ -23,7 +25,7 @@
             MainPage = resolver.Get<MainPage>();
         }
 
-        private SmartResolver CreateResolver(IComponentProvider provider)
+        private static SmartResolver CreateResolver(IComponentProvider provider)
         {
             var config = new ResolverConfig()
                 .UseAutoBinding()
@@ -40,19 +42,21 @@
 
         protected override void OnStart()
         {
-            // TODO 見直し
             var deviceManager = resolver.Get<IDeviceManager>();
+            var configuration = resolver.Get<Configuration>();
 
             var previousDate = DateTime.Today;
-            deviceManager.TimerTrigger.Subscribe(x =>
-            {
-                if (x.Date != previousDate)
+            Device.StartTimer(
+                TimeSpan.FromMinutes(1),
+                () =>
                 {
-                    deviceManager.Restart();
-                }
-            });
+                    if (configuration.DailyRestart && (DateTime.Now.Date != previousDate))
+                    {
+                        deviceManager.Restart();
+                    }
 
-            deviceManager.StartTimer();
+                    return true;
+                });
         }
 
         protected override void OnSleep()

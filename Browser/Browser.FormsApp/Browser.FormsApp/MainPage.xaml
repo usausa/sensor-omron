@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:app="clr-namespace:Browser.FormsApp;assembly=Browser.FormsApp"
-             x:Class="Browser.FormsApp.MainPage">
-
-    <ContentPage.BindingContext>
-        <app:MainPageViewModel />
-    </ContentPage.BindingContext>
+             xmlns:sr="clr-namespace:Smart.Forms.Resolver;assembly=Smart.Forms"
+             xmlns:local="clr-namespace:Browser.FormsApp;assembly=Browser.FormsApp"
+             x:Class="Browser.FormsApp.MainPage"
+             x:DataType="{x:Type local:MainPageViewModel}"
+             BindingContext="{Binding Source={x:Static local:MainPageViewModel.DesignInstance}}"
+             sr:BindingContextResolver.Type="{x:Type local:MainPageViewModel}"
+             IsBusy="{Binding BusyState.IsBusy}">
 
     <WebView Source="{Binding Url.Value}" />
 
