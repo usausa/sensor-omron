@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:sr="clr-namespace:Smart.Forms.Resolver;assembly=Smart.Forms"
+             xmlns:behaviors="clr-namespace:Browser.FormsApp.Behaviors;assembly=Browser.FormsApp"
              xmlns:local="clr-namespace:Browser.FormsApp;assembly=Browser.FormsApp"
              x:Class="Browser.FormsApp.MainPage"
              x:DataType="{x:Type local:MainPageViewModel}"
@@ -9,6 +10,25 @@
              sr:BindingContextResolver.Type="{x:Type local:MainPageViewModel}"
              IsBusy="{Binding BusyState.IsBusy}">
 
-    <WebView Source="{Binding Url.Value}" />
+    <AbsoluteLayout>
+        <WebView AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All"
+                 Source="{Binding Url.Value}" />
+
+        <BoxView AbsoluteLayout.LayoutBounds="0,0,AutoSize,1" AbsoluteLayout.LayoutFlags="XProportional,YProportional,HeightProportional"
+                 Opacity="0">
+            <BoxView.Behaviors>
+                <behaviors:SideMenuAnchorBehavior TargetObject="{x:Reference SideMenu}" />
+            </BoxView.Behaviors>
+        </BoxView>
+
+        <StackLayout x:Name="SideMenu"
+                     AbsoluteLayout.LayoutBounds="-240,0,AutoSize,1" AbsoluteLayout.LayoutFlags="YProportional,HeightProportional"
+                     WidthRequest="240"
+                     Background="White">
+            <StackLayout.Behaviors>
+                <behaviors:SideMenuBehavior />
+            </StackLayout.Behaviors>
+        </StackLayout>
+    </AbsoluteLayout>
 
 </ContentPage>

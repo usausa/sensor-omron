@@ -13,7 +13,8 @@
 
         public MainPageViewModel(Configuration configuration)
         {
-            Url.Value = configuration.Url;
+            //Url.Value = configuration.Url;
+            Url.Value = "http://192.168.100.10:3000/d/windows-hserver/windows-node?orgId=1&refresh=10s&kiosk";
         }
     }
 }
